@@ -87,3 +87,7 @@ Click "Create Background Worker" and Render will automatically build and deploy.
 - **Worker not processing jobs:** Check environment variables are set correctly
 - **Reports not generating:** Check Anthropic API key and rate limits
 - **Database errors:** Verify Supabase service role key has correct permissions
+
+## Version
+
+Last updated: 2026-01-16 - Fixed deployment configuration
