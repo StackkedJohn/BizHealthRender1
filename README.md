@@ -88,6 +88,30 @@ Click "Create Background Worker" and Render will automatically build and deploy.
 - **Reports not generating:** Check Anthropic API key and rate limits
 - **Database errors:** Verify Supabase service role key has correct permissions
 
+## Supabase Edge Function Deployment
+
+The `trigger-pipeline` edge function needs to be deployed to Supabase:
+
+```bash
+# Install Supabase CLI if not already installed
+npm install -g supabase
+
+# Login to Supabase
+supabase login
+
+# Link to your project
+supabase link --project-ref jksqdjauzohieghijkam
+
+# Deploy the edge function
+supabase functions deploy trigger-pipeline
+```
+
+### Environment Variables for Edge Function
+
+The edge function automatically uses:
+- `SUPABASE_URL` - Automatically provided by Supabase
+- `SUPABASE_SERVICE_ROLE_KEY` - Automatically provided by Supabase
+
 ## Version
 
-Last updated: 2026-01-16 - Fixed deployment configuration
+Last updated: 2026-01-16 - Fixed deployment configuration and edge function
