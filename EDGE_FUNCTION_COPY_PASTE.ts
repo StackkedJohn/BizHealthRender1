@@ -55,6 +55,17 @@ serve(async (req) => {
       );
     }
 
+    // Fetch the questionnaire data to include as payload
+    const { data: questionnaireData, error: fetchError } = await supabase
+      .from("questionnaires")
+      .select("*")
+      .eq("id", questionnaire_id)
+      .single();
+
+    if (fetchError || !questionnaireData) {
+      throw new Error(`Failed to fetch questionnaire: ${fetchError?.message || 'Not found'}`);
+    }
+
     // Add job to the pipeline queue
     // NOTE: Removed "priority" field - column doesn't exist in pipeline_queue table
     const { data: job, error: insertError } = await supabase
@@ -63,6 +74,7 @@ serve(async (req) => {
         questionnaire_id,
         user_id,
         status: "pending",
+        payload: questionnaireData,
       })
       .select()
       .single();
